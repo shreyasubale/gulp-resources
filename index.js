@@ -21,6 +21,7 @@ module.exports = function (opts) {
 
     return through.obj(function (file, enc, cb) {
         var content,
+            retVal,
             that = this,
             extraсtedResources;
 
@@ -31,32 +32,15 @@ module.exports = function (opts) {
         if (file.isBuffer()) {
             content = file.contents.toString('utf8');
             try {
-                extraсtedResources = resources(content, opts, path.dirname(file.path));
+                extraсtedResources = resources(content, opts);
             } catch (ex) {
                 this.emit('error', ex);
                 return cb();
             }
-
-            extraсtedResources.forEach(function (resource) {
-                var queryIdx = resource.indexOf('?'),
-                    query = "";
-
-                if (queryIdx > -1) {
-                    query = resource.substr(queryIdx);
-                    resource = resource.substring(0, queryIdx);
-                }
-                that.push(new gutil.File({
-                    base: file.base,
-                    cwd: file.cwd,
-                    stat: file.stat,
-                    path: resource + (opts.appendQueryToPath ? query : ""),
-                    contents: fs.readFileSync(resource)
-                }));
-            });
+            // console.log(file.path)
+            retVal = JSON.stringify(extraсtedResources)
         }
-        if (opts.src) {
-            this.push(file);
-        }
-        cb();
+
+        cb(null, retVal);
     });
 };

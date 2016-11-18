@@ -1,23 +1,23 @@
 {
-    "name": "gulp-resources",
-    "description": "Extracts js/css/less and other resources from html",
-    "version": "0.3.0",
-    "homepage": "https://github.com/gevgeny/gulp-resources",
+    "name": "gulp-resources-inline",
+    "description": "Extracts js/css/less and other resources from html, also incline scripts",
+    "version": "0.3.1",
+    "homepage": "https://github.com/shreyasubale/gulp-resources-inline",
     "author": {
-        "name": "Eugene Gluhotorenko",
-        "email": "e.gluhotorenko@gmail.com"
+        "name": "Shreyas Ubale",
+        "email": "shreyasubale@gmail.com"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/gevgeny/gulp-resources.git"
+        "url": "https://github.com/shreyasubale/gulp-resources-inline"
     },
     "bugs": {
-        "url": "https://github.com/gevgeny/gulp-resources/issues"
+        "url": "https://github.com/shreyasubale/gulp-resources-inline/issues"
     },
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/gevgeny/gulp-resources/blob/master/LICENSE"
+            "url": "https://github.com/shreyasubale/gulp-resources-inline/blob/master/LICENSE"
         }
     ],
     "engines": {

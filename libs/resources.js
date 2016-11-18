@@ -18,8 +18,8 @@ var expandResources = function (resource,type) {
 var escapeContent = function(content) {
     var entityMap = {
         '"': '&quot;',
-        "'": '&#39;',
-        "/": '&#x2F;'
+        "'": '&#39;'
+       
     };
 
 

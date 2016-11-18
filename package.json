@@ -1,7 +1,7 @@
 {
     "name": "gulp-resources-inline",
     "description": "Extracts js/css/less and other resources from html, also incline scripts",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "homepage": "https://github.com/shreyasubale/gulp-resources-inline",
     "author": {
         "name": "Shreyas Ubale",

@@ -23,7 +23,7 @@ var escapeContent = function(content) {
     };
 
 
-    return String(content).replace(/[&<>"'\/]/g, function (s) {
+    return String(content).replace(/["']/g, function (s) {
         return entityMap[s];
     });
 

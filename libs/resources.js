@@ -39,7 +39,7 @@ module.exports = function (content,opts) {
             resources.push(expandResources($element.attr('src'),"url"));
         }
         if (opts.js && $element.is('script') && !$element.attr('src')) {
-            resources.push(expandResources(escapeContent($element.html()),'script'));
+            resources.push(expandResources(opts.returnstream === false ?escapeContent($element.html()):$element.html(),'script'));
         }
 
     });

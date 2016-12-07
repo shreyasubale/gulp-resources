@@ -13,6 +13,8 @@ module.exports = function (opts) {
     opts = opts || {};
     defineOpt('js', true);
     defineOpt('css', true);
+    defineOpt('basePath', "");
+    defineOpt('returnstream',false)
     defineOpt('less', true);
     defineOpt('favicon', false);
     defineOpt('src', true);
@@ -37,10 +39,37 @@ module.exports = function (opts) {
                 this.emit('error', ex);
                 return cb();
             }
-            // console.log(file.path)
+
+
+            if(opts.returnstream === true){
+                extraсtedResources.forEach(function(resource) {
+                    // console.log(resource.type);
+                    // console.log(opts.basePath + resource.content);
+                    if(resource.type === "url") {
+                        that.push(new gutil.File({
+                            base: file.base,
+                            cwd: file.cwd,
+                            stat: file.stat,
+                            path: opts.basePath + resource.content,
+                            contents: fs.readFileSync(opts.basePath + resource.content)
+                        }));
+                    }else{
+                        that.push(new gutil.File({
+                            base: file.base,
+                            cwd: file.cwd,
+                            stat: file.stat,
+                            path: "testpath.js" + (opts.appendQueryToPath ? query : ""),
+                            contents: new Buffer(resource.content,'utf-8')
+                        }));
+                    }
+
+                    //
+                });
+            }
+
             retVal = JSON.stringify(extraсtedResources)
         }
 
-        cb(null, retVal);
+        opts.returnstream===false?cb(null,retVal):cb();
     });
 };

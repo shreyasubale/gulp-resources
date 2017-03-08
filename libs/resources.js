@@ -6,9 +6,11 @@ var cheerio = require('cheerio'),
     glob = require('glob');
 
 
-var expandResources = function (resource,type) {
+var expandResources = function (resource,type,mode) {
     type = type || "url";
+    mode = mode || "js";
     var retVal = {
+        mode : mode,
         type: type,
         content : resource
     };
@@ -19,7 +21,7 @@ var escapeContent = function(content) {
     var entityMap = {
         '"': '&quot;',
         "'": '&#39;'
-       
+
     };
 
 
@@ -40,6 +42,12 @@ module.exports = function (content,opts) {
         }
         if (opts.js && $element.is('script') && !$element.attr('src')) {
             resources.push(expandResources(opts.returnstream === false ?escapeContent($element.html()):$element.html(),'script'));
+        }
+        if (opts.css && $element.is('link') && $element.attr('href')) {
+            resources.push(expandResources($element.attr('href'),"url",'css'));
+        }
+        if (opts.js && $element.is('link') && !$element.attr('href')) {
+            resources.push(expandResources(opts.returnstream === false ?escapeContent($element.html()):$element.html(),'script','css'));
         }
 
     });
